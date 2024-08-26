@@ -31,4 +31,5 @@ could be easily modified to do that, and there are easier ways.
 The purpose of this project is to demonstrate how the pywebview module 
 provides communication between Python/tkinter and HTML/Javascript.
 
+![alttext](images/wsr_git.png "wordScriber")
 
