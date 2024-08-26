@@ -10,7 +10,7 @@ focus is on using HTML to edit, create and format,
 HTML documents. Here pywebview provides communication between
 Python/tkinter and HTML/Javascript.
 
-There are certain limitations depending on the web engin
+There are certain limitations depending on the web engine
 and API employed. Web engines used outside of an Internet 
 browser may be missing features found in the browser versions.
 In this example pywebview (_WebKitGTK_) is used in a linux environment.
