@@ -432,7 +432,7 @@ function setFileName(text) {
 }
 
 function quicksaveDocument() {
-  if (JS.val("#FN") == "docs/untitled.html") {
+  if (JS.val("#FN") == "") {
     alert("First use Save-As");
     return;
   }
@@ -526,7 +526,7 @@ window.addEventListener('keydown', function(event) {
 });
 
 Rtx1.setText("<html>");
-JS.val("#FN", "docs/untitled.html");
+JS.val("#FN", "");
 JS.htm("#SAV", "");
 
 setTimeout(getoptions, 400); // timing issue with onload

@@ -8,7 +8,7 @@ from spellchecker import SpellChecker
 
 spell = SpellChecker()
 
-current_file = "docs/untitled.html"  # tracks current file in use
+current_file = ""  # tracks current file in use
 
 def window_coord():
     px = window.x
