@@ -1,0 +1,537 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset='UTF-8'>
+	<meta name='viewport' content='width=device-width, initial-scale=1'>
+	<title>Word Scriber</title>
+  <style>
+  @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap');
+  </style>
+  <script>
+
+// myJS library
+
+'use strict';const JS={doq:qs=>document.querySelector(qs),htm:function(qs,val){if(val===undefined){return JS.doq(qs).innerHTML;}else{JS.doq(qs).innerHTML=val;}},css:function(qs,cssx){let m=JS.doq(qs);if(cssx===undefined){return m.style;}else{m.style=cssx;}},addClass:function(qs,cname){let m=JS.doq(qs);m.classList.add(cname);},delClass:function(qs,cname){let m=JS.doq(qs);m.classList.remove(cname);},gss:function(qs,cssx){let m=JS.doq(qs);let prop=window.getComputedStyle(m,null).getPropertyValue(cssx);return prop;},val:function(qs,val){if(val===undefined){return JS.doq(qs).value;}else{JS.doq(qs).value=val;}},tod:function(qs,mode){let m=JS.doq(qs);if(m.style.display==='none'){m.style.display=mode;}else{m.style.display='none';}},show:function(qs){let obj=JS.doq(qs);obj.style.visibility="visible";},hide:function(qs){let obj=JS.doq(qs);obj.style.visibility="hidden";},attr:function(qs,aname,avalue){if(avalue!==undefined){JS.doq(qs).setAttribute(aname,avalue);}else{return JS.doq(qs).getAttribute(aname);}},webget:function(url,n){fetch(url,{cache:"no-cache"}).then(function(response){return response.text().then(function(text){webresponse(n,text);});});},webgetjson:function(url,n){fetch(url,{cache:"no-cache"}).then(function(response){return response.json();}).then(function(jobj){webresponse(n,jobj);}).catch(function(error){webresponse(n,"error");});},webpost:function(url,n,qs){fetch(url,{method:'post',headers:{"Content-type":"application/x-www-form-urlencoded; charset=UTF-8"},body:qs}).then(function(response){return response.text();}).then(function(text){webresponse(n,text);}).catch(function(error){console.log('Request failed',error);});},websend:function(url,qs){fetch(url,{method:'post',headers:{"Content-type":"application/x-www-form-urlencoded; charset=UTF-8"},body:qs}).catch(function(error){console.log('Request failed',error);});},twoDigitDate:function(n){if(n<10)
+return"0"+n;else
+return n;},todayDay:function(objdate){let d;if(objdate!==undefined){d=objdate;}else{d=new Date();}
+return d.getDay();},getDOM:function(objdate){let d;if(objdate!==undefined){d=objdate;}else{d=new Date();}
+return d.getDate();},todayMon:function(objdate){let d;if(objdate!==undefined){d=objdate;}else{d=new Date();}
+return d.getMonth()+1;},todayYear:function(objdate){let d;if(objdate!==undefined){d=objdate;}else{d=new Date();}
+return d.getFullYear();},getMDY:function(objdate){let d;if(objdate!==undefined){d=objdate;}else{d=new Date();}
+let curr_date=JS.twoDigitDate(d.getDate());let curr_month=JS.twoDigitDate(d.getMonth()+1);let curr_year=d.getFullYear();return curr_month+"/"+curr_date+"/"+curr_year;},getYMD:function(objdate){let d;if(objdate!==undefined){d=objdate;}else{d=new Date();}
+let curr_date=JS.twoDigitDate(d.getDate());let curr_month=JS.twoDigitDate(d.getMonth()+1);let curr_year=d.getFullYear();return curr_year+"-"+curr_month+"-"+curr_date;},getHM:function(){let d=new Date();let curr_Hour=JS.twoDigitDate(d.getHours());let curr_Minute=JS.twoDigitDate(d.getMinutes());return curr_Hour+":"+curr_Minute;},getHM12:function(){let date=new Date();let hours=date.getHours();let minutes=date.getMinutes();let ampm=hours>=12?'pm':'am';hours=hours%12;hours=hours?hours:12;minutes=minutes<10?'0'+minutes:minutes;let strTime=hours+':'+minutes+' '+ampm;return strTime;},getShortDay:function(n){let d=new Array('Sun','Mon','Tue','Wed','Thu','Fri','Sat');return d[n];},getLongDay:function(n){let d=new Array('Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday');return d[n];},getShortMon:function(n){let m=new Array('0','Jan','Feb','Mar','Apr','May','Jun','July','Aug','Sep','Oct','Nov','Dec');return m[n];},getLongMon:function(n){let m=new Array('','January','February','March','April','May','June','July','August','September','October','November','December');return m[n];},addDays:function(n){let d=new Date();d.setDate(d.getDate()+n);return d;},sleep:function(milliSeconds){let startTime=new Date().getTime();while(new Date().getTime()<startTime+milliSeconds){}},getCB:function(){navigator.clipboard.readText().then(text=>{getCBtext(text);}).catch(err=>{alert("could not paste from clipboard");});},setCB:function(txt){navigator.clipboard.writeText(txt).catch(err=>{alert("could not copy to clipboard");});},scrollBottom:function(){window.scrollTo(0,document.body.scrollHeight);},rand:function(low,hi){return Math.floor((Math.random()*hi)+low);},getOptionText:function(sid){let obj=document.getElementById(sid);return obj.options[obj.selectedIndex].text;},getOptionIndex:function(sid){let obj=document.getElementById(sid);return obj.selectedIndex;},getQvar:function(v){let query=window.location.search.substring(1);let vars=query.split("&");for(let i=0;i<vars.length;i++){let pair=vars[i].split("=");if(pair[0]==v){return pair[1];}}
+return(false);},notify:function(msg){if(!("Notification"in window)){alert(msg);return;}
+else if(Notification.permission==="granted"){let notification=new Notification(msg);}
+else if(Notification.permission!=='denied'){Notification.requestPermission(function(permission){if(permission==="granted"){let notification=new Notification(msg);}else{alert(msg);}});}},titleCase:function(str){if(str===undefined)
+return false;else
+str=str.toString();return str.replace(/\w\S*/g,function(txt){return txt.charAt(0).toUpperCase()+txt.substr(1).toLowerCase();});},numfix:function(n,p){if(p===undefined){return parseFloat(n.toFixed(2));}else{return parseFloat(n.toFixed(p));}},dlgOpen:function(qs){return JS.doq(qs).show();},dlgClose:function(qs){return JS.doq(qs).close();},setCookie:function(cname,cvalue,exdays){let d=new Date();d.setTime(d.getTime()+(exdays*24*60*60*1000));let expires="expires="+d.toUTCString();if(exdays)
+document.cookie=cname+"="+cvalue+"; "+expires;else
+document.cookie=cname+"="+cvalue;},getCookie:function(cname){let name=cname+"=";let ca=document.cookie.split(';');for(let i=0;i<ca.length;i++){let c=ca[i];while(c.charAt(0)==' ')c=c.substring(1);if(c.indexOf(name)!=-1)
+return c.substring(name.length,c.length);}
+return"";},deleteCookie:function(name){JS.setCookie(name,"",-1);}};
+
+// ulcase library
+
+function convertToUppercase(){const selectedText=getSelectedText();if(selectedText){replaceSelectedText(selectedText.toUpperCase());}}
+function convertToLowercase(){const selectedText=getSelectedText();if(selectedText){replaceSelectedText(selectedText.toLowerCase());}}
+function removeFormats(){const selectedText=getSelectedText();if(selectedText){replaceSelectedText(selectedText);}}
+function getSelectedText(){if(window.getSelection){return window.getSelection().toString();}
+return'';}
+function replaceSelectedText(newText){const selection=window.getSelection();if(!selection.rangeCount)return;const range=selection.getRangeAt(0);range.deleteContents();range.insertNode(document.createTextNode(newText));}
+document.addEventListener('keydown',function(event){if(event.altKey&&event.key==='u'){event.preventDefault();convertToUppercase();}});document.addEventListener('keydown',function(event){if(event.altKey&&event.key==='l'){event.preventDefault();convertToLowercase();}});document.addEventListener('keydown',function(event){if(event.altKey&&event.key===';'){event.preventDefault();removeFormats();}});
+
+
+class RichTX {
+  constructor(target, ce, ta) {
+    this.target = target;
+    this.ce = ce;
+    this.ta = ta;
+  }
+
+  // method to display the text areas
+  displayAtTarget() {
+    var TG = document.getElementById(this.target);
+    TG.innerHTML = `
+  <textarea id="${this.ta}" wrap="on" style="display:none;" spellcheck="true"></textarea>
+  <div id="${this.ce}" contenteditable="true" spellcheck="true"></div>
+  `;
+    /*  These two objects are available to the developer for
+        access to the contentEditable and textarea widgets. */
+    this.CEobj = JS.doq(`#${this.ce}`);  // the contentEditable Object
+    this.TAobj = JS.doq(`#${this.ta}`);  // the textarea Object
+  }
+
+  // switch view HTML to text
+  switchView() {
+      /* toggles between textarea
+        and contentEditable
+        copying text and toggling display */
+      if (JS.gss(`#${this.ta}`, "display") == 'none') {
+          let txt = this.CEobj.innerHTML;
+          txt = this.fmthtml(txt);
+          this.CEobj.innerHTML = txt;
+      JS.val(`#${this.ta}`, this.CEobj.innerHTML); // HTML ==> TEXT
+      JS.tod(`#${this.ta}`, "block");
+      JS.tod(`#${this.ce}`, "block");
+      JS.doq(`#${this.ta}`).focus();
+      } else {
+          this.CEobj.innerHTML = JS.val(`#${this.ta}`); // TEXT ==> HTML
+          JS.tod(`#${this.ce}`, "block");
+          JS.tod(`#${this.ta}`, "block");
+          this.CEobj.focus();
+      }
+  }
+
+  fmthtml(t) {
+    /* formats the HTML when switching between text and CE
+       used in switchView method */
+      t = t.replace(/<div/g, "\n<div");
+      t = t.replace(/<br>/g, "<br>\n");
+      t = t.replace(/<\/div>/g, "\n</div>\n");
+      t = t.replace(/<\/blockquote>/g, "</blockquote>\n");
+      t = t.replace(/<blockquote/g, "\n<blockquote");
+      t = t.replace(/<\/span>/g, "</span>\n");
+      t = t.replace(/<span/g, "\n<span");
+      t = t.replace(/<ul/g, "\n<ul");
+      t = t.replace(/<ol/g, "\n<ol");
+      t = t.replace(/<\/ul>/g, "\n</ul>\n");
+      t = t.replace(/<\/ol>/g, "\n</ol>\n");
+      t = t.replace(/<li/g, "\n   <li");
+      t = t.replace(/\n\n/g, "\n"); // clean up extra blank lines
+      return t;
+  }
+
+  /*  OBJ.setText(text) loads the contextEditable object  */
+  setText(t) {
+    /* set new content */
+    this.CEobj.innerHTML = t;
+  }
+
+  getText() {
+    /* return current content */
+      let txt = this.CEobj.innerHTML;
+      return txt;
+  }
+
+} // end of class  end of class  end of class  end of class
+
+  /*  RTXexec provides a wrapper around the execCommand function
+      Formatting commands are applied to what ever contentEditable
+      block has focus.
+  */
+  function RTXexec(com, data = null) {
+      let r = document.execCommand(com, false, data);
+      if (r === false) {
+        alert("Canceled, or Command invalid or not supported!");
+      }
+  }
+
+  // Javascript pywebview API functions
+
+  var opts;  // global array of options
+
+  function getFN() {
+     window.pywebview.api.getFileName().then(content => {
+        setFileName(content);
+     });
+  }
+
+  function openFile() {  // executes python/tkinter code
+     window.pywebview.api.open_file().then(content => {
+          loadDocument(content);
+     });
+  }
+
+  function saveFile(content) {  // executes python/tkinter code
+     window.pywebview.api.save_file(content).then(content => {
+        setFileName(content);; // which should be current_path from python
+     });
+  }
+
+  function quicksaveFile(content) {  // executes python/tkinter code
+     window.pywebview.api.quick_save_file(content).then(content => {
+        setFileName(content);; // which should be current_path from python
+     });
+  }
+
+  function getoptions() {  // executes python/tkinter code
+     window.pywebview.api.open_options().then(content => {
+         setOptions(content);
+     });
+  }
+
+  function on_close() {
+     window.pywebview.api.onClose();  // immediate close no ask
+  }
+
+  function setOptions(con) {
+     /* sets the options with Javascript & CSS*/
+     opts = con.split(",");
+     //Rtx1.CEobj.style.fontFamily = opts[0];
+     JS.doq("#CE1").style.fontFamily = opts[0]; // font family
+     JS.doq("#CE1").style.fontSize = opts[1]; // font size
+     JS.doq("#CE1").style.color = opts[2]; // font color
+     JS.doq("#CE1").style.height = opts[3]; // CE height
+     JS.doq("#TA1").style.height = opts[3]; // TA height == CE
+     JS.doq("#CE1").style.lineHeight = opts[4]; // line height
+     JS.doq("body").style.background = opts[5]; // body background
+     JS.doq("#CE1").style.background = opts[6]; // CE background
+  }
+
+  function launch_editor() {
+     window.pywebview.api.open_editor();  // immediate close no ask
+  }
+
+  function launch_filemgr() {
+     window.pywebview.api.open_filemgr();  // immediate close no ask
+  }
+
+  function launch_browser() {
+      window.pywebview.api.open_browser();
+  }
+
+  function getDocStatus() {
+    // returns status to Python/webview
+    if (JS.htm("#SAV") == "") {
+      on_close();
+    } else {
+      if (confirm("Unsaved Document\nConfirm to close.")) {
+        on_close();
+      }
+    }
+  }
+
+  function doSpellCheck(content) {
+     window.pywebview.api.open_spellcheck(content).then(content => {
+         showSpelling(content);
+     });
+  }
+
+  </script>
+
+<style>
+  #CE1 {
+      padding: 5px;
+      width: 95%;
+      height: 400px;
+      border: 1px solid navy;
+      margin: auto;
+      overflow: auto;
+  }
+  #TA1 {
+      padding: 5px;
+      height: 400px; /*Note: must be same as #CE*/
+      width: 95%;  /*Note: must be same as #CE*/
+      background: #111;
+      color: lightgreen;
+      font: normal 10pt "Cascadia Code, Monospace";
+      margin: auto;
+  }
+  .gfont {
+    font-family: "Roboto Slab", serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 16pt;
+  }
+  input[type="button"] {
+    border: thin solid gray;
+    cursor: pointer;
+    border-radius: 7px;
+    margin-bottom: 7px;
+    /*width: 70px;*/
+    transition: background-color 0.3s;
+  }
+  input[type="button"]:hover {
+    background-color: white; /* Change this color to whatever you prefer */
+  }
+  .special {
+    background:Wheat;
+    color: DarkSlateGray;
+  }
+  body {
+    background: wheat;
+  }
+  #SAV {
+    color: red;
+    font-weight: bold;
+  }
+  #SPELL {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 50%;
+    background-color: #ccc;
+    /*text-align: center;*/
+    padding: 10px;
+    height: 200px;
+    border: thin solid blue;
+    overflow-y: auto; /* scroll bar */
+  }
+
+  .imgbutton {
+    vertical-align: middle;
+    width: 28px;
+    height: 28px;
+    cursor: pointer;
+    margin-bottom: 6px;
+  }
+
+</style>
+
+</head>
+<body>
+<div id="SPELL">
+</div>
+
+<center><span class="gfont">Word Scriber</span></center>
+&nbsp;&nbsp;&nbsp;<input type="text" id="FN" size=50>
+<span id="SAV">Saved</span>
+<br>
+
+<div id="RTX1"> <!-- The document space -->
+
+</div><br><center>
+
+  <img class="imgbutton" src="icons/open.png" title="Open File"
+      onclick="openFile()" />&nbsp;
+  <img class="imgbutton" src="icons/html.png"
+      onclick="Rtx1.switchView()" title="toggle html" />&nbsp;
+  <img class="imgbutton" src="icons/bold.png" title="Bold Text (Ctrl-b)"
+      onclick="RTXexec('bold')" />&nbsp; <!--bold-->
+  <img class="imgbutton" src="icons/italic.png" title="italic (Ctrl-i)"
+      onclick="RTXexec('italic')" />&nbsp; <!--italic-->
+  <img class="imgbutton" src="icons/underline.png" title="underline (Ctrl-u)"
+      onclick="RTXexec('underline')" />&nbsp; <!--underline-->
+  <img class="imgbutton" src="icons/upper.png" title="uppercase (Alt-u)"
+      onclick="convertToUppercase()" />&nbsp;
+  <img class="imgbutton" src="icons/lower.png" title="lowercase (Alt-l)"
+      onclick="convertToLowercase()" />&nbsp;
+  <img class="imgbutton" src="icons/format_size.png" title="Text Size"
+      onclick="RTXexec('fontSize', ask('Enter Font Size (small) 1-7 (big)', 1))" />&nbsp;
+  <img class="imgbutton" src="icons/link_small.png"
+      onclick="RTXexec('createLink', ask('Enter URL for Link:', 5))"
+            title="Make Link" />&nbsp; <!--create a link from selected text-->
+  <img class="imgbutton" src="icons/fonts.png"
+      onclick="RTXexec('fontName', ask('Enter System Font Name:', 2))"
+            title="font name" />&nbsp; <!-- changes font for selected text-->
+  <img class="imgbutton" src="icons/textcolor.png"
+      onclick="RTXexec('foreColor', ask('Enter Text Color:', 3))"
+            title="text color" />&nbsp; <!-- changes color for selected text-->
+  <br>
+    <img class="imgbutton" src="icons/save.png" title="Save (quick)"
+      onclick="quicksaveDocument()" />&nbsp;
+    <img class="imgbutton" src="icons/image.png" title="Insert Image"
+      onclick="insertImage()" />&nbsp;
+    <img class="imgbutton" src="icons/highlighter.png" title="Hilite Color"
+      onclick="RTXexec('hiliteColor', ask('Enter color for highlighting:', 4))" />&nbsp;
+    <img class="imgbutton" src="icons/lists.png" title="List"
+      onclick="RTXexec('insertUnorderedList')" />&nbsp;
+    <img class="imgbutton" src="icons/format_list_numbered.png" title="Numbered List"
+      onclick="RTXexec('insertOrderedList')" />&nbsp;
+    <img class="imgbutton" src="icons/format_align_left.png" title="Justify Left"
+      onclick="RTXexec('justifyLeft')" />&nbsp;
+    <img class="imgbutton" src="icons/format_align_center.png" title="Justify Center"
+      onclick="RTXexec('justifyCenter')" />&nbsp;
+    <img class="imgbutton" src="icons/format_align_right.png" title="Justify Right"
+      onclick="RTXexec('justifyRight')" />&nbsp;
+    <img class="imgbutton" src="icons/h1.png" title="heading size"
+      onclick="RTXexec('formatBlock', '<h1>')" />&nbsp;
+    <img class="imgbutton" src="icons/h2.png" title="heading size"
+      onclick="RTXexec('formatBlock', '<h2>')" />&nbsp;
+    <img class="imgbutton" src="icons/h3.png" title="heading size"
+      onclick="RTXexec('formatBlock', '<h3>')" />&nbsp;
+  <br>
+    <img class="imgbutton" src="icons/save_as.png" title="Save-As"
+      onclick="saveDocument()" />&nbsp;
+    <img class="imgbutton" src="icons/horizontal_rule.png" title="Horizontal Rule"
+      onclick="RTXexec('insertHorizontalRule')" />&nbsp;
+    <img class="imgbutton" src="icons/unformat.png" title="Remove Format"
+      onclick="RTXexec('removeFormat')" />&nbsp;
+    <img class="imgbutton" src="icons/table.png" title="insert Table"
+      onclick="generateTableHTML()" />&nbsp;
+    <img class="imgbutton" src="icons/fieldset.png" title="insert Fieldset"
+      onclick="generateFieldSet()" />&nbsp;
+    <img class="imgbutton" src="icons/files.png" title="manage files"
+      onclick="launch_filemgr()" />&nbsp;
+    <img class="imgbutton" src="icons/browse.png" title="Open in Browser"
+      onclick="launch_browser()" />&nbsp;
+    <img class="imgbutton" src="icons/settings.png" title="Options Edit"
+      onclick="launch_editor()" />&nbsp;
+    <img class="imgbutton" src="icons/spell.png" title="Spell Check"
+      onclick="getWords()" />&nbsp;
+    <img class="imgbutton" src="icons/close.png" title="Close Application"
+      onclick="getDocStatus()" />&nbsp;
+
+</center>
+
+<script>
+/* create and display the RichTX area */
+
+const Rtx1 = new RichTX("RTX1", "CE1", "TA1");
+Rtx1.displayAtTarget();
+
+
+/* Hot Keys and helper functions */
+
+/* customized prompt handler */
+var askInx = new Array(10).fill(0); // array of last responses
+var askHead = "==============\n\n";
+/* input the message for prompt and an ID number
+  for future prompt defaults */
+function ask(msg, inx) {
+  if (askInx[inx] == 0) askInx[inx] = "";
+  let val = prompt(askHead + msg, askInx[inx]);
+  if (!val)
+    return false;
+  else {
+    askInx[inx] = val; // future default
+    return val;
+  }
+}
+
+function showSpelling(content) {
+  /* executed on return from promise to python
+  which generated spelling correctioins from
+  the selected text */
+  if (content.trim() == "<br>") {
+    content = "All Good! :)"
+  }
+  JS.htm("#SPELL", content);
+  JS.tod('#SPELL', 'block');
+}
+
+function getWords() {
+  /* get the selected words (if selected)
+   and send off to python otherwise,
+   toggle "Nothing Selected". */
+  const selection = window.getSelection();
+  let selectedText = selection.toString();
+  if (selectedText == "") {
+    JS.htm('#SPELL', 'Nothing Selected<br>or same selection');
+    JS.tod('#SPELL', 'block');
+  } else {
+    const text = selectedText.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()@"?]/g, " ");
+    doSpellCheck(text); // fire off the promise to python
+  }
+  selection.removeAllRanges(); // deselect the selection
+}
+
+function insertImage() {
+  /* to insert a graphic use the insertHTML command ...
+     NOTE: the graphic must have an Internet URL */
+  let url = ask("Enter relative URL for image", 6);
+  if (url) RTXexec("insertHTML", `<img src='${url}' width=""  height=""  />`);
+}
+
+/* File loading & Saving Logic */
+
+function setFileName(text) {
+  JS.val("#FN", text);
+  JS.htm("#SAV", "");
+}
+
+function quicksaveDocument() {
+  if (JS.val("#FN") == "docs/untitled.html") {
+    alert("First use Save-As");
+    return;
+  }
+  let text = Rtx1.getText();
+  quicksaveFile(text);
+  // quicksaveFile gets the filename and calls setFileName
+}
+
+function saveDocument() {
+  let text = Rtx1.getText();
+  saveFile(text);
+  // saveFile gets the filename and calls setFileName
+}
+
+function loadDocument(text) {
+  Rtx1.setText(text);
+  getFN(); // Now get the filename from Python
+}
+
+function generateTableHTML() {
+    let tp = ask("Define table:\nrows,cols,border,space,padding\nlike 2,2,1,0,4", 7);
+    if (tp == null) return;
+    let prm = tp.split(",");
+
+    let tableHTML = `<table border=${prm[2]} cellspacing=${prm[3]} cellpadding=${prm[4]}>\n`;
+
+    for (let i = 0; i < prm[0]; i++) {
+        tableHTML += '  <tr>\n';
+        for (let j = 0; j < prm[1]; j++) {
+            tableHTML += '    <td>cell' + '</td>\n';
+        }
+        tableHTML += '  </tr>\n';
+    }
+
+    tableHTML += '</table>';
+    document.execCommand("insertHTML", false, tableHTML);
+}
+
+function generateFieldSet() {
+  let htmltext = `<fieldset style="display:inline;">\n<legend>legend</legend>\nbody<br><br><br><br>\n</fieldset>`
+  RTXexec('insertHTML', htmltext);
+}
+
+
+      /* Event Listeners */
+
+Rtx1.CEobj.addEventListener('focus', function(event) {
+  JS.htm("#SAV", "Not Saved");  // assume user is going to modify the document
+});                             // could be better
+
+window.addEventListener('keydown', function(event) {
+  if ((event.ctrlKey || event.metaKey) && event.key === 's') {
+      event.preventDefault();
+      quicksaveDocument();
+  }
+});
+
+window.addEventListener('keydown', function(event) {
+  if ((event.ctrlKey || event.metaKey) && event.key === 'q') {
+      event.preventDefault();
+      on_close();  // immediate close no ask
+  }
+});
+
+window.addEventListener('keydown', function(event) {
+  if ((event.ctrlKey || event.metaKey) && event.key === 'e') {
+    event.preventDefault();
+    launch_editor();
+  }
+});
+
+window.addEventListener('keydown', function(event) {
+  if ((event.ctrlKey || event.metaKey) && event.key === 'f') {
+    event.preventDefault();
+    launch_filemgr();
+  }
+});
+
+window.addEventListener('keydown', function(event) {
+  if ((event.ctrlKey || event.metaKey) && event.key === 'z') {
+    event.preventDefault();
+    RTXexec('undo');
+  }
+});
+
+window.addEventListener('keydown', function(event) {
+  if ((event.ctrlKey || event.metaKey) && event.key === 't') {
+    event.preventDefault();
+    RTXexec('redo');
+  }
+});
+
+Rtx1.setText("<html>");
+JS.val("#FN", "docs/untitled.html");
+JS.htm("#SAV", "");
+
+setTimeout(getoptions, 400); // timing issue with onload
+JS.tod('#SPELL', 'block'); // toggle off the spell check panel
+
+</script>
+</body>
+</html>
