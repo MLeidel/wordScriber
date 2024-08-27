@@ -234,23 +234,8 @@ class RichTX {
     font-style: normal;
     font-size: 16pt;
   }
-  input[type="button"] {
-    border: thin solid gray;
-    cursor: pointer;
-    border-radius: 7px;
-    margin-bottom: 7px;
-    /*width: 70px;*/
-    transition: background-color 0.3s;
-  }
-  input[type="button"]:hover {
-    background-color: white; /* Change this color to whatever you prefer */
-  }
-  .special {
-    background:Wheat;
-    color: DarkSlateGray;
-  }
   body {
-    background: wheat;
+    background: white;
   }
   #SAV {
     color: red;
@@ -268,13 +253,16 @@ class RichTX {
     border: thin solid blue;
     overflow-y: auto; /* scroll bar */
   }
-
+  .imgbutton:hover {
+    background-color: white;
+  }
   .imgbutton {
     vertical-align: middle;
     width: 28px;
     height: 28px;
     cursor: pointer;
     margin-bottom: 6px;
+    transition: background-color 0.4s;
   }
 
 </style>
@@ -285,7 +273,7 @@ class RichTX {
 </div>
 
 <center><span class="gfont">Word Scriber</span></center>
-&nbsp;&nbsp;&nbsp;<input type="text" id="FN" size=50>
+&nbsp;&nbsp;&nbsp;<input type="text" id="FN" size=60>
 <span id="SAV">Saved</span>
 <br>
 
@@ -311,15 +299,17 @@ class RichTX {
       onclick="RTXexec('fontSize', ask('Enter Font Size (small) 1-7 (big)', 1))" />&nbsp;
   <img class="imgbutton" src="icons/link_small.png"
       onclick="RTXexec('createLink', ask('Enter URL for Link:', 5))"
-            title="Make Link" />&nbsp; <!--create a link from selected text-->
+            title="Make Link" />&nbsp;
   <img class="imgbutton" src="icons/fonts.png"
       onclick="RTXexec('fontName', ask('Enter System Font Name:', 2))"
-            title="font name" />&nbsp; <!-- changes font for selected text-->
+            title="font name" />&nbsp;
   <img class="imgbutton" src="icons/textcolor.png"
       onclick="RTXexec('foreColor', ask('Enter Text Color:', 3))"
-            title="text color" />&nbsp; <!-- changes color for selected text-->
+            title="text color" />&nbsp;
+  <img class="imgbutton" src="icons/indent.png" title="indent (Alt-i)"
+      onclick="RTXexec('indent')" />&nbsp;
   <br>
-    <img class="imgbutton" src="icons/save.png" title="Save (quick)"
+    <img class="imgbutton" src="icons/save.png" title="Save (Ctrl-s)"
       onclick="quicksaveDocument()" />&nbsp;
     <img class="imgbutton" src="icons/image.png" title="Insert Image"
       onclick="insertImage()" />&nbsp;
@@ -341,6 +331,8 @@ class RichTX {
       onclick="RTXexec('formatBlock', '<h2>')" />&nbsp;
     <img class="imgbutton" src="icons/h3.png" title="heading size"
       onclick="RTXexec('formatBlock', '<h3>')" />&nbsp;
+    <img class="imgbutton" src="icons/outdent.png" title="outdent (Alt-o)"
+      onclick="RTXexec('outdent')" />&nbsp;
   <br>
     <img class="imgbutton" src="icons/save_as.png" title="Save-As"
       onclick="saveDocument()" />&nbsp;
@@ -524,6 +516,23 @@ window.addEventListener('keydown', function(event) {
     RTXexec('redo');
   }
 });
+
+Rtx1.CEobj.addEventListener('keydown', function(event) {
+  if (event.altKey && event.key === 'o') {
+      event.preventDefault();
+      RTXexec('outdent')
+  }
+});
+
+Rtx1.CEobj.addEventListener('keydown', function(event) {
+  if (event.altKey && event.key === 'i') {
+      event.preventDefault();
+      RTXexec('indent')
+  }
+});
+
+      // event.preventDefault();
+      // RTXexec('indent')
 
 Rtx1.setText("<html>");
 JS.val("#FN", "");
