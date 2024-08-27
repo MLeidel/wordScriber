@@ -6,7 +6,7 @@ Linux version
 This project demonstrates how to create apps that 
 combine a python module (tkinter) and an HTML GUI 
 in an offline desktop situation. In this case the 
-focus is on using HTML to edit, create and format,
+focus is on using HTML to edit, create, and format
 HTML documents. Here pywebview provides communication between
 Python/tkinter and HTML/Javascript.
 
@@ -25,9 +25,6 @@ to force the tkinter dialogs to open on the correct screen
 of a dual monitor setup. If you are using a single monitor, 
 then remove the indicated code from wsr.py.
 
-As you may have realized, I'm not using the webview module
-to bring Internet pages into a desktop environment. This project
-could be easily modified to do that, and there are easier ways.
 The purpose of this project is to demonstrate how the pywebview module 
 provides communication between Python/tkinter and HTML/Javascript.
 
