@@ -10,11 +10,12 @@ spell = SpellChecker()
 
 current_file = ""  # tracks current file in use
 
-def window_coord():
-    px = window.x
-    py = window.y
-    geo = f"20x20+{px}+{py}"
-    return geo
+# UNCOMMENT THIS FUNCTION TO WORK ON DUAL MONITORS (there is more)
+# def window_coord():
+#     px = window.x
+#     py = window.y
+#     geo = f"20x20+{px}+{py}"
+#     return geo
 
 def on_closing():
     return True
@@ -43,14 +44,14 @@ class Api:
 
     def open_file(self):
         ''' called from javascript '''
-        root = tk.Tk()  # remove if single monitor
-        root.geometry(window_coord())  # remove if single monitor
+        # root = tk.Tk()  # UNCOMMENT TO WORK ON DUAL MONITORS
+        # root.geometry(window_coord())  # UNCOMMENT TO WORK ON DUAL MONITORS
         global current_file
         file_path = filedialog.askopenfilename(initialdir="./docs",
                                                title = "Open file",
                                                filetypes = (("HTML", "*.html"),
                                                             ("all files", "*.*")))
-        root.destroy()  # remove if single monitor
+        # root.destroy()  # UNCOMMENT TO WORK ON DUAL MONITORS
         if file_path:
             current_file = file_path
             with open(current_file, 'r') as file:
@@ -59,15 +60,15 @@ class Api:
 
     def save_file(self, content):
         ''' called from javascript '''
-        root = tk.Tk()  # remove if single monitor
-        root.geometry(window_coord())  # remove if single monitor
+        # root = tk.Tk()  # UNCOMMENT TO WORK ON DUAL MONITORS
+        # root.geometry(window_coord())  # UNCOMMENT TO WORK ON DUAL MONITORS
         global current_file
         file_path = filedialog.asksaveasfilename(initialdir="./docs",
                                                  defaultextension=".html",
                                                  initialfile="",
                                                  filetypes = (("HTML", "*.html"),
                                                             ("all files", "*.*")))
-        root.destroy()  # remove if single monitor
+        # root.destroy()  # remove if single monitor
         if file_path:
             current_file = file_path
             with open(file_path, 'w') as file:
@@ -123,10 +124,10 @@ if __name__ == '__main__':
     api = Api()
 
     opts = api.open_options().split(',')
-    w = int(opts[7]) # width
-    h = int(opts[8]) # height
-    tx = opts[9]  # text editor
-    fm = opts[10] # file manager
+    w = int(opts[6]) # width
+    h = int(opts[7]) # height
+    tx = opts[8]  # text editor
+    fm = opts[9] # file manager
 
     window = webview.create_window('Word Scriber',
                      url='index.html',

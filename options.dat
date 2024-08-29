@@ -1,31 +1,26 @@
 = Options.dat file
-= Some simple customizations
 = after changing this file restart the app
-==============
-= Arial - font
-= 11pt  - font size
-= #016  - font color
-= 400px - hight of editing area
-= 125%  - spacing between lines of text as a percent
-= #ccc  - background of app
-= #fff  - background of editing area
-==============
-= 700   - App window width on startup
-= 670   - App window height on startup
-==============
-= gedit - your text editor
-= caja  - your file manager
+==========================================
+= font
+= font size
+= font color
+= text line height
+= background color of app
+= background color of editing area
+= App window WIDTH on startup
+= App window HEIGHT on startup
+= text editor
+= file manager
 ============== Edit Below Here ==============
-Arial
+= Liberation Sans | FreeSans | Noto Sans | DejaVu Sans | Sansation
+= FreeSerif | Liberation Serif | DejaVu Serif | Noto Serif
+Noto Serif
 11pt
-#016
-450px
+#111
 125%
 #abc
-#fff
-============== App window
+#eee
+800
 700
-670
-============== text editor and file manager
 mousepad
 thunar

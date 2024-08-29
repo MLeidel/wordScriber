@@ -165,17 +165,21 @@ class RichTX {
   }
 
   function setOptions(con) {
-     /* sets the options with Javascript & CSS*/
-     opts = con.split(",");
-     //Rtx1.CEobj.style.fontFamily = opts[0];
-     JS.doq("#CE1").style.fontFamily = opts[0]; // font family
-     JS.doq("#CE1").style.fontSize = opts[1]; // font size
-     JS.doq("#CE1").style.color = opts[2]; // font color
-     JS.doq("#CE1").style.height = opts[3]; // CE height
-     JS.doq("#TA1").style.height = opts[3]; // TA height == CE
-     JS.doq("#CE1").style.lineHeight = opts[4]; // line height
-     JS.doq("body").style.background = opts[5]; // body background
-     JS.doq("#CE1").style.background = opts[6]; // CE background
+    /* sets the options with Javascript & CSS*/
+    var wh = 0; // wanted window height
+    const originalRatio = 700 / 490;
+    opts = con.split(",");
+    JS.doq("#CE1").style.fontFamily = opts[0]; // font family
+    JS.doq("#CE1").style.fontSize = opts[1]; // font size
+    JS.doq("#CE1").style.color = opts[2]; // font color
+    JS.doq("#CE1").style.lineHeight = opts[3]; // line height
+    JS.doq("body").style.background = opts[4]; // body background
+    JS.doq("#CE1").style.background = opts[5]; // CE background
+    // Calculate the new length for CE to keep the ratio close
+    wh = opts[7]; // (new) window height
+    const newCE = wh / originalRatio;
+    JS.doq("#CE1").style.height = "" + newCE + "px"; // CE height
+    JS.doq("#TA1").style.height = "" + newCE + "px"; // TA height
   }
 
   function launch_editor() {
@@ -210,18 +214,25 @@ class RichTX {
   </script>
 
 <style>
+  body html{
+    background: white;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
   #CE1 {
       padding: 5px;
-      width: 95%;
+      width: 98%;
       height: 400px;
       border: 1px solid navy;
       margin: auto;
       overflow: auto;
+      box-sizing: border-box;
   }
   #TA1 {
       padding: 5px;
       height: 400px; /*Note: must be same as #CE*/
-      width: 95%;  /*Note: must be same as #CE*/
+      width: 98%;  /*Note: must be same as #CE*/
       background: #111;
       color: lightgreen;
       font: normal 10pt "Cascadia Code, Monospace";
@@ -233,9 +244,6 @@ class RichTX {
     font-weight: 600;
     font-style: normal;
     font-size: 16pt;
-  }
-  body {
-    background: white;
   }
   #SAV {
     color: red;
@@ -261,10 +269,15 @@ class RichTX {
     width: 28px;
     height: 28px;
     cursor: pointer;
-    margin-bottom: 6px;
+    margin-bottom: 8px;
     transition: background-color 0.4s;
   }
-
+  .BTN {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    overflow-y: auto; /* scroll bar */
+  }
 </style>
 
 </head>
@@ -273,14 +286,14 @@ class RichTX {
 </div>
 
 <center><span class="gfont">Word Scriber</span></center>
-&nbsp;&nbsp;&nbsp;<input type="text" id="FN" size=60>
+&nbsp;&nbsp;<input type="text" id="FN" size=60>
 <span id="SAV">Saved</span>
 <br>
 
 <div id="RTX1"> <!-- The document space -->
 
 </div><br><center>
-
+<div id="BTN">
   <img class="imgbutton" src="icons/open.png" title="Open File"
       onclick="openFile()" />&nbsp;
   <img class="imgbutton" src="icons/html.png"
@@ -354,7 +367,8 @@ class RichTX {
       onclick="getWords()" />&nbsp;
     <img class="imgbutton" src="icons/close.png" title="Close Application"
       onclick="getDocStatus()" />&nbsp;
-
+  <br>
+</div>
 </center>
 
 <script>
@@ -440,6 +454,7 @@ function saveDocument() {
 }
 
 function loadDocument(text) {
+  if (text == "") return;
   Rtx1.setText(text);
   getFN(); // Now get the filename from Python
 }
@@ -530,9 +545,6 @@ Rtx1.CEobj.addEventListener('keydown', function(event) {
       RTXexec('indent')
   }
 });
-
-      // event.preventDefault();
-      // RTXexec('indent')
 
 Rtx1.setText("<html>");
 JS.val("#FN", "");
