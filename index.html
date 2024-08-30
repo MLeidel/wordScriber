@@ -98,6 +98,8 @@ class RichTX {
       t = t.replace(/<\/ol>/g, "\n</ol>\n");
       t = t.replace(/<li/g, "\n<li");
       t = t.replace(/\n\n/g, "\n"); // clean up extra blank lines
+      t = t.replace(/  /g, ""); // clean up extra spaces lines
+      t = t.replace(/\t/g, ""); // clean up extra tabs
       return t;
   }
 
