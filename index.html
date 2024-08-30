@@ -278,12 +278,37 @@ class RichTX {
     width: 100%;
     overflow-y: auto; /* scroll bar */
   }
+  dialog {
+    background: #ddd;
+    border: thin solid black;
+    border-radius: 10px;
+  }
+
 </style>
 
 </head>
+
 <body>
+
 <div id="SPELL">
 </div>
+
+<dialog id="d2">
+  <p>
+    Text Color<br>
+    click:
+    <input type="color" id="c2" value="#888899">
+  </p>
+    <input type="button" onclick="getColor('#c2','#d2')" value="Accept">
+</dialog>
+<dialog id="d1">
+  <p>
+    Highlight Color<br>
+    click:
+    <input type="color" id="c1" value="#888899">
+  </p>
+    <input type="button" onclick="getColor('#c1','#d1')" value="Accept">
+</dialog>
 
 <center><span class="gfont">Word Scriber</span></center>
 &nbsp;&nbsp;<input type="text" id="FN" size=60>
@@ -317,8 +342,9 @@ class RichTX {
       onclick="RTXexec('fontName', ask('Enter System Font Name:', 2))"
             title="font name" />&nbsp;
   <img class="imgbutton" src="icons/textcolor.png"
-      onclick="RTXexec('foreColor', ask('Enter Text Color:', 3))"
-            title="text color" />&nbsp;
+      onclick="JS.dlgOpen('#d1')" title="text color" />&nbsp;
+      <!-- onclick="RTXexec('foreColor', xxxxxxxxxx)" -->
+
   <img class="imgbutton" src="icons/indent.png" title="indent (Alt-i)"
       onclick="RTXexec('indent')" />&nbsp;
   <br>
@@ -327,7 +353,9 @@ class RichTX {
     <img class="imgbutton" src="icons/image.png" title="Insert Image"
       onclick="insertImage()" />&nbsp;
     <img class="imgbutton" src="icons/highlighter.png" title="Hilite Color"
-      onclick="RTXexec('hiliteColor', ask('Enter color for highlighting:', 4))" />&nbsp;
+      onclick="JS.dlgOpen('#d2');" />&nbsp;
+      <!-- onclick="RTXexec('hiliteColor', xxxxxxxxxxxxxxx)"-->
+
     <img class="imgbutton" src="icons/lists.png" title="List"
       onclick="RTXexec('insertUnorderedList')" />&nbsp;
     <img class="imgbutton" src="icons/format_list_numbered.png" title="Numbered List"
@@ -428,6 +456,17 @@ function insertImage() {
      NOTE: the graphic must have an Internet URL */
   let url = ask("Enter relative URL for image", 6);
   if (url) RTXexec("insertHTML", `<img src='${url}' width=""  height=""  />`);
+}
+
+function getColor(cid, did) {
+  /* needs both color type ID and dialog ID */
+  var chosenColor = JS.val(cid);
+  //console.log('Chosen Color:', chosenColor);
+  // actions
+  if (did == "#d2") RTXexec('hiliteColor', chosenColor);
+  if (did == "#d1") RTXexec('foreColor', chosenColor);
+  // close the dialog
+  JS.doq(did).close();
 }
 
 /* File loading & Saving Logic */

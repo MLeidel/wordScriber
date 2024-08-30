@@ -104,7 +104,6 @@ class Api:
 
     def open_spellcheck(self, content):
         # process sting of words and return results
-        print(content)
         wlist = content.split()         # string to list
         words = spell.unknown(wlist)    # spell check the list
         strwords = "<br>"
@@ -115,7 +114,6 @@ class Api:
             # Get a list of `likely` options
             strwords += str(spell.candidates(word))
             strwords += "<hr>"
-        print (strwords)
         return strwords
 
 # Create a webview window
