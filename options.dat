@@ -7,20 +7,17 @@
 = text line height
 = background color of app
 = background color of editing area
-= App window WIDTH on startup
-= App window HEIGHT on startup
 = text editor
 = file manager
 ============== Edit Below Here ==============
 = Liberation Sans | FreeSans | Noto Sans | DejaVu Sans | Sansation
 = FreeSerif | Liberation Serif | DejaVu Serif | Noto Serif
+=============================================
 Noto Serif
 11pt
 #111
 125%
 #abc
 #eee
-800
-700
 mousepad
 thunar
