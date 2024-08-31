@@ -44,14 +44,14 @@ class Api:
 
     def open_file(self):
         ''' called from javascript '''
-        root = tk.Tk()  # UNCOMMENT TO WORK ON DUAL MONITORS
-        root.geometry(window_coord())  # UNCOMMENT TO WORK ON DUAL MONITORS
+        root = tk.Tk()  # COMMENT TO WORK ON ONE MONITOR
+        root.geometry(window_coord())  # COMMENT TO WORK ON ONE MONITOR
         global current_file
         file_path = filedialog.askopenfilename(initialdir="./docs",
                                                title = "Open file",
                                                filetypes = (("HTML", "*.html"),
                                                             ("all files", "*.*")))
-        root.destroy()  # UNCOMMENT TO WORK ON DUAL MONITORS
+        root.destroy()  # COMMENT TO WORK ON ONE MONITOR
         if file_path:
             current_file = file_path
             with open(current_file, 'r') as file:
@@ -60,8 +60,8 @@ class Api:
 
     def save_file(self, content):
         ''' called from javascript '''
-        root = tk.Tk()  # UNCOMMENT TO WORK ON DUAL MONITORS
-        root.geometry(window_coord())  # UNCOMMENT TO WORK ON DUAL MONITORS
+        root = tk.Tk()  # COMMENT TO WORK ON ONE MONITOR
+        root.geometry(window_coord())  # COMMENT TO WORK ON ONE MONITOR
         global current_file
         file_path = filedialog.asksaveasfilename(initialdir="./docs",
                                                  defaultextension=".html",
