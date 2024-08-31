@@ -20,7 +20,7 @@ def window_coord():
 def on_closing():
     return True
     # Issues
-    # If using single monitor delete 'return True' above and uncomment below
+    # IF USING SINGLE MONITOR SYSTEM delete 'return True' above and uncomment below
     # if messagebox.askokcancel("Save File?", "Really want to close this App?"):
     #     return True
     # else:
@@ -44,14 +44,14 @@ class Api:
 
     def open_file(self):
         ''' called from javascript '''
-        root = tk.Tk()  # COMMENT TO WORK ON ONE MONITOR
-        root.geometry(window_coord())  # COMMENT TO WORK ON ONE MONITOR
+        root = tk.Tk()  # COMMENT IF USING SINGLE MONITOR SYSTEM
+        root.geometry(window_coord())  # COMMENT IF USING SINGLE MONITOR SYSTEM
         global current_file
         file_path = filedialog.askopenfilename(initialdir="./docs",
                                                title = "Open file",
                                                filetypes = (("HTML", "*.html"),
                                                             ("all files", "*.*")))
-        root.destroy()  # COMMENT TO WORK ON ONE MONITOR
+        root.destroy()  # COMMENT IF USING SINGLE MONITOR SYSTEM
         if file_path:
             current_file = file_path
             with open(current_file, 'r') as file:
@@ -60,8 +60,8 @@ class Api:
 
     def save_file(self, content):
         ''' called from javascript '''
-        root = tk.Tk()  # COMMENT TO WORK ON ONE MONITOR
-        root.geometry(window_coord())  # COMMENT TO WORK ON ONE MONITOR
+        root = tk.Tk()  # COMMENT IF USING SINGLE MONITOR SYSTEM
+        root.geometry(window_coord())  # COMMENT IF USING SINGLE MONITOR SYSTEM
         global current_file
         file_path = filedialog.asksaveasfilename(initialdir="./docs",
                                                  defaultextension=".html",

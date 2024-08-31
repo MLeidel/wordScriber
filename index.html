@@ -520,6 +520,12 @@ Rtx1.CEobj.addEventListener('focus', function(event) {
   JS.htm("#SAV", "Not Saved");  // assume user is going to modify the document
 });                             // could be better
 
+Rtx1.CEobj.addEventListener('keydown', function(event) {
+  // set 'Not Saved' message on keydowns
+  if (event.ctrlKey || event.altKey|| event.metaKey) return;
+  JS.htm("#SAV", "Not Saved");
+});
+
 window.addEventListener('keydown', function(event) {
   if ((event.ctrlKey || event.metaKey) && event.key === 's') {
       event.preventDefault();
