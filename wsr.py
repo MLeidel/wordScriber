@@ -126,7 +126,7 @@ if __name__ == '__main__':
     fm = opts[7] # file manager
 
     window = webview.create_window('Word Scriber',
-                     url='index.html',
+                     url='wsr.html',
                      width=650,
                      height=675,
                      js_api=api)

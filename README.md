@@ -3,30 +3,104 @@
 __HTML local document editor__  
 Linux version
 
-This project demonstrates how to create apps that 
-combine a python module (tkinter) and an HTML GUI 
-in an offline desktop situation. In this case the 
-focus is on using HTML to edit, create, and format
-HTML documents. Here pywebview provides communication between
-Python/tkinter and HTML/Javascript.
+WordScriber is a simple offline HTML document editor 
+which demonstrates how to create apps that 
+combine a python/tkinter module and an HTML GUI 
+in an offline desktop situation. In other words
+Python manages local resources while HTML manages
+the user interface.
+
+To accomplish this _pywebview_ python module provides 
+communication between __Python/tkinter__ and __HTML/Javascript__.
 
 There are certain limitations depending on the web engine
 and API employed. Web engines used outside of an Internet 
 browser may be missing features found in the browser versions.
-For Linux pywebview uses _WebKitGTK_ to render HTML in a
+For Linux _pywebview_ uses __WebKitGTK__ to render HTML in a
 an HTML _contentEditable_ block.
 
-In the Linux case (_WebKitGTK_) spell checking is absent. 
-In the Windows version of wordScriber pywebview
-uses _WebView2_ (part of Edge) which does provide
+In __WebKitGTK__ spell checking is absent. 
+In the Windows version of wordScriber _pywebview_
+uses __WebView2__ (part of _Edge_) which does provide
 spell checking in a limited way. 
-
-[If you're using dual monitors there is code
-in __wsr.py__ that can be un-commented to fix the problem
-of dialogs opening on the second monitor (tkinter problem.)]
-
-The purpose of this project is to demonstrate how the pywebview module 
-provides communication between Python/tkinter and HTML/Javascript.
 
 ![alttext](images/wsr_git.png "wordScriber")
 
+Python 3.x  and a few other things must be installed:
+
+```bash
+sudo apt install python3   
+sudo apt install python3-tk
+sudo apt install python3-pip
+sudo apt install python3-pil.imagetk
+pip install pywebview
+pip install spellchecker
+```
+
+Before using wsr.pyw open the options.dat file with a text editor (default: Mousepad) and review the initial settings. In particular make sure the text editor and file manager are items installed on your system. The Linux file manager is called Thunar, caja, Nemo, or Nautilus which ever you use.
+
+## Run the App:
+
+`c:\wsr\python3 wsr.py`
+
+Often you will need to select the text that you want to apply formatting to.
+
+Hot Keys
+
+Ctrl-s ... Quick Save -b  
+Ctrl-q ... Quit      -b  
+Ctrl-c ... Copy selected text to clipboard  
+Ctrl-v ... Paste from clipboard  
+Ctrl-e ... Edit Options.dat file      -b  
+Ctrl-z ... Undo  
+Ctrl-t ... Redo  
+Ctrl-f ... Launch File Manager      -b  
+Ctrl-i ... Italic      -b  
+Ctrl-u ... Underline      -b  
+Ctrl-b ... Bold      -b  
+Alt-i  ... Indent      -b  
+Alt-o  ... Outdent      -b  
+Alt-u  ... UPPERCASE selected  
+Alt-l  ... lowercase selected  
+
+Once Word Scriber is installed it will not require an Internet connection. WordScriber does not have "Find" and "Replace" functions.
+
+## File and Graphics
+
+Files can be opened and stored anywhere. The default location for files in in the application directory in a folder called "docs". Graphic file must be stored in or under the application directory. An "images" folder is provided by the installation. There is a button that will open your systems file manager to the applications directory.
+
+## HTML
+
+The HTML is 'roughly' formated so at least it is readable.
+
+## Options file
+
+The options.dat file in the application's directory contains settings important to initialization of the app on startup. 
+
+font  
+like Arial or DejaVu Serif
+
+font size  
+like 11pt
+
+font color  
+\#000 or black
+
+text line height  
+like 125%
+
+background color of app  
+like \#ADD8E6 or lightblue
+
+background color of editing area  
+like #fff or white
+
+text editor  
+name of a text editor installed on your system
+Its only use at this time is to open the options.dat file
+like gedit or mousepad or sublime or ...
+
+file manager  
+name of a file manager install on your system
+It will help with document and graphic management
+like thunar or caja or nautilus or ...
