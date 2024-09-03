@@ -37,7 +37,10 @@ pip install pywebview
 pip install spellchecker
 ```
 
-Before using wsr.pyw open the options.dat file with a text editor (default: Mousepad) and review the initial settings. In particular make sure the text editor and file manager are items installed on your system. The Linux file manager is called Thunar, caja, Nemo, or Nautilus which ever you use.
+Before using wsr.pyw open the options.dat file with a text editor (default: Mousepad) 
+and review the initial settings. In particular make sure the text editor 
+and file manager are items installed on your system. The Linux file manager is 
+called Thunar, caja, Nemo, or Nautilus which ever you use.
 
 ## Run the App:
 
@@ -46,36 +49,44 @@ Before using wsr.pyw open the options.dat file with a text editor (default: Mous
 Often you will need to select the text that you want to apply formatting to.
 
 Hot Keys
-
+```bash
 Ctrl-s ... Quick Save -b  
-Ctrl-q ... Quit      -b  
+Ctrl-q ... Quit -b  
 Ctrl-c ... Copy selected text to clipboard  
 Ctrl-v ... Paste from clipboard  
-Ctrl-e ... Edit Options.dat file      -b  
+Ctrl-e ... Edit Options.dat file -b  
 Ctrl-z ... Undo  
 Ctrl-t ... Redo  
-Ctrl-f ... Launch File Manager      -b  
-Ctrl-i ... Italic      -b  
-Ctrl-u ... Underline      -b  
-Ctrl-b ... Bold      -b  
-Alt-i  ... Indent      -b  
-Alt-o  ... Outdent      -b  
-Alt-u  ... UPPERCASE selected  
-Alt-l  ... lowercase selected  
-
-Once Word Scriber is installed it will not require an Internet connection. WordScriber does not have "Find" and "Replace" functions.
+Ctrl-f ... Launch File Manager  -b  
+Ctrl-i ... Italic  -b  
+Ctrl-u ... Underline -b  
+Ctrl-b ... Bold   -b  
+Alt-i  ... Indent  -b  
+Alt-o  ... Outdent -b  
+Alt-u  ... UPPERCASE selected  -b
+Alt-l  ... lowercase selected  -b
+```
+Once Word Scriber is installed it will not require an Internet connection.      
+WordScriber does not have "Find" and "Replace" functions.
 
 ## File and Graphics
 
-Files can be opened and stored anywhere. The default location for files in in the application directory in a folder called "docs". Graphic file must be stored in or under the application directory. An "images" folder is provided by the installation. There is a button that will open your systems file manager to the applications directory.
+Files can be opened and stored anywhere. The default location for files in in 
+the application directory in a folder called "docs". Graphic file must be stored 
+in or under the application directory. An "images" folder is provided by the installation. 
+There is a button that will open your systems file manager to the applications directory.
 
 ## HTML
 
 The HTML is 'roughly' formated so at least it is readable.
+The document.execCommand() function is no longer supported for relevant web standards but will
+probably be kept for compatibility purposes. There is no adequate replacement, in my opinion, that works
+as smoothly as document.execCommand. . . . .
 
 ## Options file
 
-The options.dat file in the application's directory contains settings important to initialization of the app on startup. 
+The options.dat file in the application's directory contains settings important 
+to initialization of the app on startup. 
 
 font  
 like Arial or DejaVu Serif
