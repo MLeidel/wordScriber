@@ -3,14 +3,15 @@
 __HTML local document editor__  
 Linux version
 
-WordScriber is a simple offline HTML document editor 
-which demonstrates how to create apps that 
+WordScriber is a _simple_ offline HTML document editor.
+There is probably no great use for it as an application;
+however, it does domonstrate how to create apps that 
 combine a python/tkinter module and an HTML GUI 
 in an offline desktop situation. In other words
 Python manages local resources while HTML manages
 the user interface.
 
-To accomplish this _pywebview_ python module provides 
+To accomplish this the ___pywebview___ python module provides 
 communication between __Python/tkinter__ and __HTML/Javascript__.
 
 There are certain limitations depending on the web engine
@@ -79,9 +80,15 @@ There is a button that will open your systems file manager to the applications d
 ## HTML
 
 The HTML is 'roughly' formated so at least it is readable.
-The document.execCommand() function is no longer supported for relevant web standards but will
-probably be kept for compatibility purposes. There is no adequate replacement, in my opinion, that works
-as smoothly as document.execCommand. . . . .
+The ___document.execCommand()___ function is no longer supported 
+for relevant web standards but will
+probably be kept for compatibility purposes. 
+There is no adequate replacement for it, in my opinion, that works
+as smoothly as it does. 
+
+In _wordScriber_ I've used a Javascript function
+called _insertHTML_ which replaces the execCommand("insertHTML") function
+and enabled me to write Javascript functions for _table_ and _fieldset_ as well.
 
 ## Options file
 
@@ -92,26 +99,26 @@ font
 like Arial or DejaVu Serif
 
 font size  
-like 11pt
+_like 11pt_
 
 font color  
 \#000 or black
 
 text line height  
-like 125%
+_like 125%_
 
 background color of app  
 like \#ADD8E6 or lightblue
 
 background color of editing area  
-like #fff or white
+_like #fff or white_
 
 text editor  
 name of a text editor installed on your system
 Its only use at this time is to open the options.dat file
-like gedit or mousepad or sublime or ...
+_like gedit or mousepad or sublime or ..._
 
 file manager  
 name of a file manager install on your system
 It will help with document and graphic management
-like thunar or caja or nautilus or ...
+_like thunar or caja or nautilus or ..._
