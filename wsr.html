@@ -199,7 +199,7 @@ function insertHTML(html) {
   }
 
   function setOptions(con) {
-    opts = con.split(",");
+    opts = con.split(","); // con is a csv string
     JS.doq("#CE1").style.fontFamily = opts[0]; // font family
     JS.doq("#CE1").style.fontSize = opts[1]; // font size
     JS.doq("#CE1").style.color = opts[2]; // font color
@@ -498,7 +498,6 @@ function insertImage() {
 function getColor(cid, did) {
   /* needs both color type ID and dialog ID */
   var chosenColor = JS.val(cid);
-  //console.log('Chosen Color:', chosenColor);
   // actions
   if (did == "#d2") RTXexec('hiliteColor', chosenColor);
   if (did == "#d1") RTXexec('foreColor', chosenColor);

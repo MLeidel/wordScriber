@@ -4,11 +4,22 @@ from tkinter import filedialog
 from tkinter import messagebox
 import subprocess
 import webbrowser
+import iniproc
 from spellchecker import SpellChecker
 
 spell = SpellChecker()
 
 current_file = ""  # tracks current file in use
+opts = []
+
+opts = iniproc.read("options.ini", 'fontfamily',
+                                   'fontsize',
+                                   'fontcolor',
+                                   'linespace',
+                                   'appbackground',
+                                   'docbackground',
+                                   'texteditor',
+                                   'filemanager')
 
 # UNCOMMENT THIS FUNCTION TO WORK ON DUAL MONITORS (there is more)
 def window_coord():
@@ -86,14 +97,10 @@ class Api:
 
     def open_options(self):
         ''' called from javascript '''
-        with open("options.dat", 'r') as file:
-            lst = [line for line in file if not line.lstrip().startswith('=')]
-            lst = [i.strip() for i in lst]  # strip end of lines
-            return ','.join(lst)  # make a csv string
-        return ''
+        return ','.join(opts)  # make a csv string
 
     def open_editor(self):
-        subprocess.Popen([tx, "./options.dat"])
+        subprocess.Popen([tx, "./options.ini"])
 
     def open_filemgr(self):
         subprocess.Popen([fm, "./"])
@@ -121,7 +128,6 @@ if __name__ == '__main__':
 
     api = Api()
 
-    opts = api.open_options().split(',')
     tx = opts[6]  # text editor
     fm = opts[7] # file manager
 
