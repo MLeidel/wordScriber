@@ -4,8 +4,9 @@
 	<meta charset='UTF-8'>
 	<meta name='viewport' content='width=device-width, initial-scale=1'>
 	<title>Word Scriber</title>
-  <script src="myJS.js"></script>
+  <script src="myJS.js"></script> <!-- see https://github.com/MLeidel/myJS -->
   <script src="ulcase.js"></script>
+  <srcipt src="JSmodal.min.js"></srcipt> <!-- see https://github.com/MLeidel/JSmodal -->
   <style>
   @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap');
   </style>
@@ -18,6 +19,8 @@ blocks. Instantiate as many times as needed. It provides some useful methods:
   setText Note: this version is modified for "offline" application
   getText
 
+see: https://github.com/MLeidel/RichTX
+
 Example Usage:
 
     <div id="RTX1"> <!-- The document block -->
@@ -29,6 +32,7 @@ Example Usage:
     Rtx1.displayAtTarget();
 */
 
+// see https://github.com/MLeidel/RichTX
 class RichTX {
   constructor(target, ce, ta) {
     this.target = target;
@@ -311,12 +315,15 @@ function insertHTML(html) {
     height: 28px;
     cursor: pointer;
     margin-bottom: 8px;
-    transition: background-color 0.4s;
+    transition: background-color 0.6s;
   }
   dialog {
     background: #ddd;
     border: thin solid black;
     border-radius: 10px;
+  }
+  .highlight {
+      background-color: yellow;
   }
 
 </style>
@@ -367,7 +374,7 @@ function insertHTML(html) {
       onclick="RTXexec('bold')" />&nbsp; <!--bold-->
   <img class="imgbutton" src="icons/italic.png" title="italic (Ctrl-i)"
       onclick="RTXexec('italic')" />&nbsp; <!--italic-->
-  <img class="imgbutton" src="icons/underline.png" title="underline (Ctrl-u)"
+  <img class="imgbutton" src="icons/underline.png" title="underline"
       onclick="RTXexec('underline')" />&nbsp; <!--underline-->
   <img class="imgbutton" src="icons/upper.png" title="uppercase (Alt-u)"
       onclick="convertToUppercase()" />&nbsp;
@@ -420,17 +427,19 @@ function insertHTML(html) {
     onclick="generateTableHTML()" />&nbsp;
   <img class="imgbutton" src="icons/fieldset.png" title="insert Fieldset"
     onclick="generateFieldSet()" />&nbsp;
-  <img class="imgbutton" src="icons/files.png" title="manage files"
+  <img class="imgbutton" src="icons/files.png" title="manage files (Ctrl-m)"
     onclick="launch_filemgr()" />&nbsp;
   <img class="imgbutton" src="icons/browse.png" title="Open in Browser"
     onclick="launch_browser()" />&nbsp;
-  <img class="imgbutton" src="icons/settings.png" title="Options Edit"
+  <img class="imgbutton" src="icons/settings.png" title="Options Edit (Ctrl-e)"
     onclick="launch_editor()" />&nbsp;
   <img class="imgbutton" src="icons/spell.png" title="Spell Check"
     onclick="getWords()" />&nbsp;
-  <img class="imgbutton" src="icons/close.png" title="Close Application"
+  <img class="imgbutton" src="icons/search.png" title="Find (Ctrl-f)"
+    onclick="findText( ask('Enter search text', 'text'))" />&nbsp;
+<!--   <img class="imgbutton" src="icons/close.png" title="Close Application"
     onclick="getDocStatus()" />&nbsp;
-  <br>
+ -->  <br>
 </div>
 </center>
 
@@ -558,6 +567,24 @@ function generateFieldSet() {
   insertHTML(htmltext);
 }
 
+function findText(searchText) {
+  const CE = Rtx1.CEobj;
+  const content = CE.innerHTML;
+
+  // Remove existing highlights or clear if !searchText
+  CE.innerHTML = content.replace(/<span class="highlight">([^<]+)<\/span>/gi, '$1');
+  if (!searchText) {
+      return;
+  }
+
+  const regex = new RegExp(`(${searchText})`, 'gi');
+  const newContent = CE.innerHTML.replace(regex, '<span class="highlight">$1</span>');
+
+  CE.innerHTML = newContent;
+}
+
+
+
 /*
              ___                      _
             | __| __ __  ___   _ _   | |_   ___
@@ -577,16 +604,16 @@ Rtx1.CEobj.addEventListener('keydown', function(event) {
 });
 
 window.addEventListener('keydown', function(event) {
-  if ((event.ctrlKey || event.metaKey) && event.key === 's') {
+  if ((event.ctrlKey || event.metaKey) && event.key === 'f') {
       event.preventDefault();
-      quicksaveDocument();
+      findText( ask('Enter search text', 'text'));
   }
 });
 
 window.addEventListener('keydown', function(event) {
-  if ((event.ctrlKey || event.metaKey) && event.key === 'q') {
+  if ((event.ctrlKey || event.metaKey) && event.key === 's') {
       event.preventDefault();
-      on_close();  // immediate close no ask
+      quicksaveDocument();
   }
 });
 
@@ -598,7 +625,7 @@ window.addEventListener('keydown', function(event) {
 });
 
 window.addEventListener('keydown', function(event) {
-  if ((event.ctrlKey || event.metaKey) && event.key === 'f') {
+  if ((event.ctrlKey || event.metaKey) && event.key === 'm') {
     event.preventDefault();
     launch_filemgr();
   }
@@ -618,6 +645,28 @@ window.addEventListener('keydown', function(event) {
   }
 });
 
+window.addEventListener('keydown', function(event) {
+  if (event.ctrlKey && event.key === 'h') {
+      event.preventDefault();
+      location = "docs/wsr_hotkeys.html";
+  }
+});
+
+window.addEventListener('keydown', function(event) {
+    if ((event.ctrlKey || event.metaKey) && event.key === 'Escape') {
+        event.preventDefault();
+        findText(false);
+    }
+  }
+);
+
+window.addEventListener('keydown', function(event) {
+  if ((event.ctrlKey || event.metaKey) && event.key === 'q') {
+      event.preventDefault();
+      getDocStatus(); // close application
+  }
+});
+
 Rtx1.CEobj.addEventListener('keydown', function(event) {
   if (event.altKey && event.key === 'o') {
       event.preventDefault();
@@ -631,6 +680,8 @@ Rtx1.CEobj.addEventListener('keydown', function(event) {
       RTXexec('indent')
   }
 });
+
+
 
 Rtx1.setText("<html>");
 JS.val("#FN", "");
