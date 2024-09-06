@@ -51,24 +51,26 @@ Often you will need to select the text that you want to apply formatting to.
 
 Hot Keys
 ```bash
-Ctrl-s ... Quick Save -b  
-Ctrl-q ... Quit -b  
-Ctrl-c ... Copy selected text to clipboard  
-Ctrl-v ... Paste from clipboard  
-Ctrl-e ... Edit Options.dat file -b  
-Ctrl-z ... Undo  
-Ctrl-t ... Redo  
-Ctrl-f ... Launch File Manager  -b  
-Ctrl-i ... Italic  -b  
-Ctrl-u ... Underline -b  
-Ctrl-b ... Bold   -b  
-Alt-i  ... Indent  -b  
-Alt-o  ... Outdent -b  
-Alt-u  ... UPPERCASE selected  -b
-Alt-l  ... lowercase selected  -b
+Ctrl-h ... Help
+Ctrl-s ... Quick Save
+Ctrl-q ... Quit
+Ctrl-c ... Copy selected text to clipboard
+Ctrl-v ... Paste from clipboard
+Ctrl-e ... Edit Options.dat file 
+Ctrl-z ... Undo
+Ctrl-t ... Redo
+Ctrl-m ... Launch File Manager
+Ctrl-i ... Italic 
+Ctrl-b ... Bold
+Ctrl-f ... Find Text
+Ctrl-ESC.. Clear Found
+Alt-i  ... Indent
+Alt-o  ... Outdent
+Alt-u  ... UPPERCASE selected
+Alt-l  ... lowercase selected
 ```
+WordScriber does not have a "Replace" function.
 Once Word Scriber is installed it will not require an Internet connection.      
-WordScriber does not have "Find" and "Replace" functions.
 
 ## File and Graphics
 
@@ -84,7 +86,7 @@ The ___document.execCommand()___ function is no longer supported
 for relevant web standards but will
 probably be kept for compatibility purposes. 
 There is no adequate replacement for it, in my opinion, that works
-as smoothly as it does. 
+as smoothly. 
 
 In _wordScriber_ I've used a Javascript function
 called _insertHTML_ which replaces the execCommand("insertHTML") function
